@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    <div>
+        <div class="user">
+            <h1 style="text-align: center; padding: 20px;">{{user}}'s HISTORY OF COMPLETED</h1>
+        </div>
+        <hr>
+        <div class="backL">
+            <a href="{% url 'list' %}"><button>List</button></a>
+        </div>
+        <div class="logout">
+            {% if list %}
+            <a href="{% url 'home' %}"><button>Add More</button></a>
+            {% endif %}
+            {% if list %}
+            <a href="{% url 'history' %}"><button>History</button></a> {% endif %}
+            <a href="{% url 'login' %}"><button>Logout</button></a>
+        </div>
+        <div class="listitem">
+            {% if list %}
+            {% for i in list %}
+            {% if i.completed == True %}
+            <div class="items" data-aos="zoom-out-down">
+                <div>
+                    <h2>{{i.title}}</h2>
+                    <p>{{i.description}}</p>
+                    {% if i.completed == True %}
+                    <p>Status: <span style="color: greenyellow;font-weight: 600;">Completed</span></p>
+                    {% endif %}
+                    <span style="font-size: 16px; color: rgb(252, 140, 59);">Created at: {{i.createdat}}</span>
+                </div>
+                <div>
+                    <a href="{% url 'delete' i.id %}"><button id="del">Delete</button></a>
+                    <a href="{% url 'notask' i.id %}"><button id="ntcmplt">Not Completed</button></a>
+
+                </div>
+            </div>
+            {% else %}
+            <div class="empytiem">
+                <h1>You don't have any completed Tasks</h1>
+                <h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
+                        class="bi bi-list-task" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zM3 3H2v1h1z" />
+                        <path
+                            d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1z" />
+                        <path fill-rule="evenodd"
+                            d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5zM2 7h1v1H2zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm1 .5H2v1h1z" />
+                    </svg>
+                </h1>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif%}
+        </div>
+    </div>
+</section>
+{% endblock content %}

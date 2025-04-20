@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <div class="continer">
+        <div class="formcontiner">
+            <h1 style="text-align: center;">User Regesitration</h1> <br>
+            <div class="errorlist">
+                {% if msg.cred %}
+                {{msg.cred}}
+                {% endif %}
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>
+                    <label for="">Username:</label>
+                    <input type="text" name="username" id="username" required>
+                </p>
+                <p>
+                    <label for="">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                </p>
+                <p><input type="submit" value="Login"></p>
+                <div style="text-align: center;">
+                    <h3>If you don't have an account <a id="login" href="{% url 'register' %}">Create Account</a></h3>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}

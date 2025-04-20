@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <div class="continer">
+        <div class="user" style="text-align: center;">
+            <h1>Wellcome {{user}}</h1>
+            <h3>Start adding your list below</h3>
+        </div>
+        <div class="formcontiner">
+            <div class="errorlist">
+                {% if msg.empty %}
+                {{msg.empty}}
+                {% endif %}
+            </div>
+            <!-- {{msg}} -->
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="title" id="name" placeholder="Enter the title" required>
+                <textarea name="description" id="description" placeholder="Enter the Description of Your Task" required></textarea>
+                <button>Add to list</button>
+            </form>
+            <br>
+            <div class="logout1">
+                <a href="{% url 'login' %}"><button>Logout</button></a>
+            </div>
+            <br>
+            <a class="mylist" href="{% url 'list' %}"><button>My Bucket List</button></a>
+            <div class="successlist">
+                {% if msg.success %}
+                <p>{{msg.success}}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+{% endblock content %}

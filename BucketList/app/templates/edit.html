@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <div class="continer">
+        <div class="user" style="text-align: center;">
+            <h1>Wellocme {{user}}</h1>
+            <h3>Start adding your list below</h3>
+        </div>
+        <div class="formcontiner">
+            <div class="errorlist">
+                {% if msg.empty %}
+                {{msg.empty}}
+                {% endif %}
+            </div>
+            <!-- {{msg}} -->
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="title" id="name" value="{{list.title}}" placeholder="Enter the title" required>
+                <input type="text" name="description" id="description" value="{{list.description}}" placeholder="Edit the Description of Your Task" required>
+                <button>Update the list</button>
+            </form>
+            <br>
+            <a class="mylist" href="{% url 'list' %}"><button>My Bucket List</button></a>
+            <div class="successlist">
+                {% if msg.success %}
+                <p>{{msg.success}}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+{% endblock content %}
