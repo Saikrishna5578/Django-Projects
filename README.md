@@ -1,4 +1,4 @@
-Django-Projects
+<h1>Django-Projects</h1>
 This repository contains a collection of Django projects, each organized in its own folder. The projects demonstrate various Django functionalities and serve as a portfolio of web applications built with Django.
 Repository Structure
 
