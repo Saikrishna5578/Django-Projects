@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    <div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <!-- <span class="close">&times;</span> -->
+                <div class="alert-text" id="alertMessage"></div>
+                <button class="btn" onclick="closeModal()"><a href="{% url 'home' %}">OK</a></button>
+            </div>
+        </div>
+        <!-- Display the message -->
+        {% if messages %}
+        {% for message in messages %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Show the modal
+                var modal = document.getElementById("myModal");
+                var alertMessage = document.getElementById("alertMessage");
+                modal.style.display = "block";
+                alertMessage.innerHTML = `
+                <img src="{% static 'images/password.png' %}" alt="" width='200' height = '200'>{{ message | safe }}`;
+            });
+        </script>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div>
+        <a href="{% url 'home' %}">
+            <span>
+                <i title="Back to Home" class="fa-solid fa-arrow-left back"></i>
+            </span>
+        </a>
+    </div>
+    <div class="head">
+        <h1>PIN GENERATION</h1>
+    </div>
+
+    <div class="createform" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="500">
+
+        <section>
+            <div class="error">
+                {% if msg.account %}
+                <h1 style="font-size: 50px;">{{ msg.account }} </h1><br>
+                {% endif %}
+                {% if msg.pin %}
+                <li>{{ msg.pin }}</li>
+                {% endif %}
+                {% if msg.cnfpin %}
+                <li>{{ msg.cnfpin }} </li>
+                {% endif %}
+            </div>
+        </section>
+
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="data">
+                <label for="pin">Pin:</label>
+                <input type="text" name="pin" id="pin" maxlength="6" placeholder="Enter Your 6 digit PIN" required>
+            </div>
+            <br>
+            <div class="data">
+                <label for="cnfpin">Confirm Pin:</label>
+                <input type="text" name="cnfpin" id="cnfpin" maxlength="6" placeholder="Confirm Your 6 digit PIN"
+                    required>
+            </div>
+            <br>
+            <div class="data">
+                <input type="submit" value="Generate Pin">
+            </div>
+            <br>
+            <div class="data">
+                <input type="reset" value="Cancle">
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

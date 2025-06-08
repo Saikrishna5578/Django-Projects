@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section>
+     <div class="head">
+        <h1>BLACK MONEY BANK</h1>
+    </div>
+    <div class="itemscontainer crtacc">
+        <a title="Create Account" href="{% url 'register' %}">
+            <div class="items">
+                <img src="{% static 'images/new.png' %}" alt="New">
+                <h3>Create Account</h3>
+            </div>
+        </a>
+        <a title="Login" href="{% url 'pin' %}">
+            <div class="items">
+                <img src="{% static 'images/user.png' %}" alt="New">
+                <h3>Already have an account Login Here</h3>
+            </div>
+        </a>
+    </div>
+</section>
+
+{% endblock content %}

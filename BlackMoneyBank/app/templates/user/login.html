@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    
+    <div>
+        
+        <a href="{% if user.is_authenticated %}{% url 'logout' %}{% else %}{% url 'index' %}{% endif %}">
+            <span>
+                <i title="Back to Home" class="fa-solid fa-arrow-left back"></i>
+            </span>
+        </a>
+    </div> 
+    <div class="head">
+        <h1>LOGIN TO YOUR ACCOUNT</h1>
+    </div>
+    <div class="createform" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="500">
+        <section>
+            <div class="error">
+                {% if msg.user %}
+                {{ msg.user }}  <a style="color: blueviolet;  font-weight: 550;  text-decoration: underline; text-align: center;" href="{% url 'register' %}">Don't have an
+                    Account Create Here</a>
+                {% endif %}
+            </div>
+        </section>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="data">
+                <label for="acc_num">Enter Username:</label>
+                <input type="text" name="un" id="un" placeholder="Username" required>
+            </div>
+            <br>
+            <div class="data">
+                <label for="mobile">Password:</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <br>
+            <div class="data">
+                <input type="submit" value="Login">
+            </div>
+            <br>
+            <div class="data">
+                
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

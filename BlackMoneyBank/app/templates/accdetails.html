@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    <div>
+        <a href="{% url 'home' %}">
+            <span>
+                <i title="Back to Home" class="fa-solid fa-arrow-left back"></i>
+            </span>
+        </a>
+    </div>
+    <div class="head">
+        <h1>ACCOUNT DETAILS</h1>
+    </div>
+    <div class="createform" data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="500">
+        {% if acc %}
+        <div class="wellocme">
+            <h1>Wellcome <span style="color: rgb(246, 105, 4);">{{acc.name}}</span>, Your Details</h1>
+        </div>
+        <br>
+        <div class="accdetials">
+            <table cellspacing="10">
+                <tr style="font-weight: 600; color: blueviolet; font-size: larger;">
+                    <td>Your Account Number:</td>
+                    <td>{{acc.acc_num}}</td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td>{{acc.name}}</td>
+                </tr>
+                <tr>
+                    <td>Gender:</td>
+                    <td>{{acc.gender}}</td>
+                </tr>
+                <tr>
+                    <td>Phone Number:</td>
+                    <td>{{acc.phone}}</td>
+                </tr>
+                <tr>
+                    <td>Aadhar:</td>
+                    <td>{{acc.aadhar}}</td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td>{{acc.address}}</td>
+                </tr>
+
+            </table>
+            <br>
+            <!-- <div id="note">
+                <h3>PLEASE GENERATE YOUR PIN TO PERFORM OTHER OPERATIONS</h3>
+            </div> -->
+            <br>
+            <!-- <div>
+                <a href="{% url 'pin' %}"><button id="navpin">GENERATE PIN</button></a>
+            </div> -->
+        </div>
+        {% endif %}
+    </div>
+
+
+</section>
+
+{% endblock content %}

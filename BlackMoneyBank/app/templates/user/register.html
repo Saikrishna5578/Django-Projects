@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    <div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="alert-text" id="alertMessage"></div>
+            </div>
+        </div>
+        <!-- Display the message -->
+        {% if show_modal %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Show the modal
+                var modal = document.getElementById("myModal");
+                var alertMessage = document.getElementById("alertMessage");
+                modal.style.display = "block";
+                alertMessage.innerHTML = `
+                <div class="error">
+                    {% if msg.aadhar %}
+                    <li>{{ msg.aadhar }}</li>
+                    {% endif %}
+            
+                    {% if msg.mobile %}
+                    <li>{{ msg.mobile }} </li>
+                    {% endif %}
+                
+                    {% if msg.exists %}
+                    <li>{{ msg.exists }} <a href="{% url 'pin' %}">GENERATE PIN</a> hear</li>
+                    {% endif %}
+
+                    {% if msg.exists_ph %}
+                    <li>{{ msg.exists_ph }}</li>
+                    {% endif %}
+
+                    {% if msg.exists_em %}
+                    <li>{{ msg.exists_em }}</li>
+                    {% endif %}
+
+                    {% if msg.nouser %}
+                    <li>{{ msg.nouser }}</li>
+                    {% endif %}
+                </div>
+            
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="data">
+                        <label for="name">OTP:</label>
+                        <input type="number" name="otp" id="otp" placeholder="Enter Your Name" required autofocus>
+                    </div>
+                    <br>
+                    <div class="data">
+                        <input type="submit" name="btntype" value="Verify" id="submit">
+                    </div>
+                </form>
+
+                `;
+            });
+        </script>
+        {% endif %}
+    </div>
+    <div>
+        <a href="{% url 'index' %}">
+            <span>
+                <i title="Back to Home" class="fa-solid fa-arrow-left back"></i>
+            </span>
+        </a>
+    </div>
+    <div class="head">
+        <h1>USER REGISTRATION</h1>
+    </div>
+    <div class="createform">
+        {% if form.errors %}
+        <div class="error">
+            {% for field in form %}
+            {% for error in field.errors %}
+            <p><strong>{{ field.label }}:</strong> {{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="data registerform">
+                {{form}}
+            </div>
+            <br>
+            <div class="data">
+                <input type="submit" name="btntype" value="Create User" id="submit">
+            </div>
+            <br>
+            <div class="data">
+                <input type="reset" name="" id="">
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock content %}

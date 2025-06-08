@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section>
+    <div class="head">
+        <h1>Hai, <span style="color: red;">{{user}}</span> Wellocme to BLACK MONEY BANK</h1>
+    </div>
+
+    <div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <!-- <span class="close">&times;</span> -->
+                <div class="alert-text" id="alertMessage"></div>
+                <button class="btn" onclick="closeModal()"><a href="{% url 'pin' %}">SET PIN</a></button>
+            </div>
+        </div>
+        <!-- Display the message -->
+        {% if messages %}
+        {% for message in messages %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Show the modal
+                var modal = document.getElementById("myModal");
+                var alertMessage = document.getElementById("alertMessage");
+                modal.style.display = "block";
+                alertMessage.innerHTML = "{{ message | safe }}";
+            });
+
+            // Close the modal
+            function closeModal() {
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
+        </script>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="itemscontainer">
+        <a title="Pin Generation" href="{% url 'pin' %}" data-aos="zoom-in-right">
+            <div class="items">
+                <img src="{% static 'images/pin.png' %}" alt="New">
+                {% if pin == "000000" %}
+                <h3>Pin Generation</h3>
+                {% else %}
+                <h3>Reset Your Pin</h3>
+                {% endif %}
+            </div>
+        </a>
+        <a title="Check Balance" href="{% url 'balance' %}" data-aos="zoom-in">
+            <div class="items">
+                <img src="{% static 'images/balance.png' %}" alt="New">
+                <h3>Avaliable Balance</h3>
+            </div>
+        </a>
+        <a title="Deposite Amount" href="{% url 'deposite' %}" data-aos="zoom-in-left">
+            <div class="items">
+                <img src="{% static 'images/deposite.png' %}" alt="New">
+                <h3>Deposite</h3>
+            </div>
+        </a>
+        <a title="Withdraw Amount" href="{% url 'withdraw' %}" data-aos="zoom-in-right">
+            <div class="items">
+                <img src="{% static 'images/withdraw.png' %}" alt="New">
+                <h3>Withdraw</h3>
+            </div>
+        </a>
+        <a title="Account Transfer" href="{% url 'acctransfer' %}" data-aos="zoom-in">
+            <div class="items">
+                <img src="{% static 'images/transfer.png' %}" alt="New">
+                <h4>Account to Account Transfer</h4>
+            </div>
+        </a>
+        <a title="Your Details" href="{% url 'accdetails' %}" data-aos="zoom-in-left">
+            <div class="items">
+                <img src="{% static 'images/accdetails.png' %}" alt="New">
+                <h3>{{user}}'s Details</h3>
+            </div>
+        </a>
+    </div>
+</section>
+
+{% endblock content %}

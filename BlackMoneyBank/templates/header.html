@@ -1,0 +1,38 @@
+{% load static %}
+<section>
+    <nav>
+        <div class="navbar">
+            <span>
+                <img src="{% static 'images/logo.jpeg' %}" alt="Logo" width="65" height="65">
+
+                {% if user.is_authenticated %}
+                <a href="{% url 'home' %}">Home</a>
+                {% endif %}
+            </span>
+            {% if user.is_authenticated %}
+            <span style="visibility: hidden;">
+                <marquee behavior="slide" direction="left" scrollamount="10">Wellcome to BLACK MONEY BANK(BMB) all
+                    banking
+                    solutions at one place
+                </marquee>
+            </span>
+            <span style="color: white; padding-right: 80px; text-transform: uppercase;">
+                <a href="{% url 'accdetails' %}">{{user}}</a>
+            </span>
+            {% else %}
+            <span>
+                <marquee behavior="slide" direction="left" scrollamount="10">Wellcome to BLACK MONEY BANK(BMB) all
+                    banking
+                    solutions at one place
+                </marquee>
+            </span>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <span>
+                <a href="{% url 'logout' %}">Logout</a>
+            </span>
+            {% endif %}
+        </div>
+    </nav>
+
+</section>

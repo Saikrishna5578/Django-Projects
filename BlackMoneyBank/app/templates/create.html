@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    <div>
+        <a href="{% url 'index' %}">
+            <span>
+                <i title="Back to Home" class="fa-solid fa-arrow-left back"></i>
+            </span>
+        </a>
+    </div>
+    <div class="head">
+        <h1>ACCOUNT CREATION</h1>
+    </div>
+
+    <div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <!-- <span class="close">&times;</span> -->
+                <div class="alert-text" id="alertMessage"></div>
+                <button class="btn" onclick="closeModal()">Fill Personal Details</button>
+            </div>
+        </div>
+        <!-- Display the message -->
+        {% if messages %}
+        {% for message in messages %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Show the modal
+                var modal = document.getElementById("myModal");
+                var alertMessage = document.getElementById("alertMessage");
+                modal.style.display = "block";
+                alertMessage.innerHTML = "{{ message | safe }}";
+            });
+
+            // Close the modal
+            function closeModal() {
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
+        </script>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="createform" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="500">
+        {% if success %}
+        <div class="success">
+            <h1><span style="text-transform: uppercase;">{{ success }}</span> <br> Please Generate Your PIN <a
+                    href="{% url 'pin' %}">GENERATE PIN</a> before proceding further</h1>
+        </div>
+        {% endif %}
+
+        <div class="error">
+            {% if msg.aadhar %}
+            <li>{{ msg.aadhar }}</li>
+            {% endif %}
+
+            {% if msg.mobile %}
+            <li>{{ msg.mobile }} </li>
+            {% endif %}
+
+            {% if msg.exists %}
+            <li>{{ msg.exists }} <a href="{% url 'pin' %}">GENERATE PIN</a> hear</li>
+            {% endif %}
+            {% if msg.exists_ph %}
+            <li>{{ msg.exists_ph }}</li>
+            {% endif %}
+            {% if msg.exists_em %}
+            <li>{{ msg.exists_em }}</li>
+            {% endif %}
+            {% if msg.nouser %}
+            <li>{{ msg.nouser }}</li>
+            {% endif %}
+        </div>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="data">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" placeholder="Enter Your Name" required autofocus>
+            </div>
+            <br>
+            <div class="data">
+                <fieldset style="padding: 10px; border: 1px solid gainsboro; border-radius: 5px;">
+                    <legend>Select Gender:</legend>
+                    <div>
+                        <input type="radio" name="gender" value="Male" id="Male">
+                        <label for="Male">Male</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="gender" value="Female" id="Female">
+                        <label for="Female">Female</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="gender" value="Others" id="Others">
+                        <label for="Others">Others</label>
+                    </div>
+                </fieldset>
+            </div>
+            <br>
+            <div class="data">
+                <label for="mobile">Mobile:</label>
+                <input type="tel" name="mobile" id="mobile" placeholder="Enter Your Mobile Number" required>
+            </div>
+            <br>
+            <div class="data">
+                <label for="mobile">Email:</label>
+                <input type="emaill" name="email" id="email" placeholder="Ex: abcdef@gmail.com" required>
+            </div>
+            <br>
+            <div class="data">
+                <label for="aadhar">Aadhar Number:</label>
+                <input type="number" name="aadhar" id="aadhar" maxlength="12" placeholder="Enter Your Aadhar Number"
+                    required>
+            </div>
+            <br>
+            <div class="data">
+                <label for="address">Address:</label>
+                <textarea
+                    style="resize: none; border: 1px solid gainsboro; border-radius: 5px; padding: 10px; font-size: 18px;"
+                    name="address" id="address" cols="30" rows="5" placeholder="Enter Your Full Address"></textarea>
+            </div>
+            <br>
+            <div class="data">
+                <input type="submit" name="btntype" value="Create Account" id="submit">
+            </div>
+            <br>
+            <div class="data">
+                <input type="reset" name="" id="">
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock content %}
